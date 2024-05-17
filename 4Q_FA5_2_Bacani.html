@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts List</title>
+</head>
+<body>
+    <h2>Contacts List</h2>
+    <input type="text" id="conName" placeholder="Enter name">
+    <button onclick="addCon()">Add</button>
+    <button onclick="removeCon()">Remove</button>
+    <div id="conList"></div>
+
+    <script>
+        let con = [];
+
+        function updateconList() {
+            const conList = document.getElementById('conList');
+            conList.innerHTML = '';
+            con.forEach(contact => {
+                const span = document.createElement('span');
+                span.textContent = contact;
+                span.style.marginRight = '10px';
+                conList.appendChild(span);
+            });
+        }
+
+        function addCon() {
+            const conName = document.getElementById('conName').value.trim();
+            if (conName) {
+                if (con.length >= 7) {
+                    con.shift();
+                }
+                con.push(conName);
+                updateconList();
+                document.getElementById('conName').value = '';
+            }
+        }
+
+        function removeCon() {
+            if (con.length > 0) {
+                con.pop();
+                updateconList();
+            }
+        }
+    </script>
+</body>
+</html>
